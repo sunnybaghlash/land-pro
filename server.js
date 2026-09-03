@@ -4,7 +4,7 @@ const PORT= process.env.PORT ||5000;
 const startServer= async()=>{
     try
     {
-        await pool.query("SELECT 1")
+        // await pool.query("SELECT 1")
         console.log("connected sucessfully  ");
         app.listen(PORT,()=>{
             console.log(`server is listening on ${PORT}`)

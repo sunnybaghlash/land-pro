@@ -1,37 +1,21 @@
-// const {Pool}=require("pg")
-// require("dotenv").config({ override: true });
-
-// const pool= new Pool({
-//     host:process.env.DB_HOST,
-//     port:process.env.DB_PORT,
-//     user:process.env.DB_USER,
-//     password:process.env.DB_PASSWORD,
-//     database:process.env.DB_NAME
-// });
-// pool.on("connect",()=>{
-//     console.log("postges database is connected");
-
-// })
-// pool.on("error",(err)=>{
-//     console.log(`err is ${err}`)
-// })
-// module.exports=pool
 const { Pool } = require("pg");
-require("dotenv").config({ override: true });
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT) || 5432,
 
-pool.on("connect", () => {
-    console.log("postgres database is connected");
+    // Local PostgreSQL ke liye SSL nahi
+    // Render production ke liye SSL
+    ssl: process.env.NODE_ENV === "production"
+        ? { rejectUnauthorized: false }
+        : false
 });
 
 pool.on("error", (err) => {
-    console.log(`db error: ${err.message}`);
+    console.error("Unexpected PostgreSQL error:", err);
 });
 
 module.exports = pool;
