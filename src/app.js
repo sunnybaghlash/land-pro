@@ -3,12 +3,14 @@ const cors=require("cors");
 require("dotenv").config();
 const authRoute=require("./routes/authRoute")
 const serviceRoute=require("./routes/services")
+const orderRoute=require("./routes/order")
 require("dotenv").config();
 const app=express();
 app.use(cors())
 app.use(express.json())
 app.use("/api/auth",authRoute);
-app.use("/api/auth",serviceRoute)
+app.use("/api/auth",serviceRoute);
+app.use('/api/auth/orders',orderRoute)
 app.get("/",(req,res)=>{
     res.status(200).json({message:"hello"})
     console.log("Hello World")

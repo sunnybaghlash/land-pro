@@ -20,9 +20,11 @@ exports.getServicePackagesById=async(req,res,next)=>{
     {
             const {serviceName}=req.body;
             console.log(serviceName)
+            // const serviceName="asda"
             if(!serviceName)
                 return res.status(400).json({message:"Not Service Id is found"})
             const result=await serviceModel.getServicePackageByServiceId(serviceName);
+            console.log(result)
             return res.status(200).json({message:"sucess",data:result})
     }
     catch(e)
