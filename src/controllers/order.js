@@ -42,10 +42,24 @@ exports.getAllOrderOfUser=async(req,res,next)=>{
 exports.postOrder=async(req,res,next)=>{
     try
     {
-        const {user_id,service_package_id,subtotal,discount,total_amount,advance_amount,paid_amount,details}=req.body;
-            const result= await orderModel.postOrderByUserId(user_id,service_package_id,subtotal,discount,total_amount,advance_amount,paid_amount,details);
+        const {user_id,service_package_id,subtotal,discount,total_amount,advance_amount,paid_amount,details,district,tehsil,village,userName,mobile}=req.body;
+            const result= await orderModel.postOrderByUserId(user_id,service_package_id,subtotal,discount,total_amount,advance_amount,paid_amount,details,district,tehsil,village,userName,mobile);
         console.log(result);
         res.status(200).json({data:result})
+    }
+    catch(e)
+    {
+        next(e)
+    }
+}
+exports.updateOrder=async(req,res,next)=>{
+    try
+    {
+        const {userId}=req.body;
+        const {status}=req.body;
+        const result= await orderModel.updateOrder(userId,status);
+       
+        res.status(200).json({result:result,message:true})
     }
     catch(e)
     {
