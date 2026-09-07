@@ -25,6 +25,7 @@ exports.getServicePackagesById=async(req,res,next)=>{
                 return res.status(400).json({message:"Not Service Id is found"})
             const result=await serviceModel.getServicePackageByServiceId(serviceName);
             console.log(result)
+            console.log(result)
             return res.status(200).json({message:"sucess",data:result})
     }
     catch(e)

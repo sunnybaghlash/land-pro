@@ -55,9 +55,9 @@ exports.postOrder=async(req,res,next)=>{
 exports.updateOrder=async(req,res,next)=>{
     try
     {
-        const {userId}=req.body;
+        const {orderId}=req.body;
         const {status}=req.body;
-        const result= await orderModel.updateOrder(userId,status);
+        const result= await orderModel.updateOrder(orderId,status);
        
         res.status(200).json({result:result,message:true})
     }
@@ -66,3 +66,5 @@ exports.updateOrder=async(req,res,next)=>{
         next(e)
     }
 }
+
+// ADMIN ORDERS UPDATE
