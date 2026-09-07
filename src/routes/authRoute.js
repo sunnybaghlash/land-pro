@@ -12,5 +12,5 @@ router.get("/me", authMiddleware, (req, res) => {
         user: req.user
     });
 });
-router.put("/updateProfile",authController.updateProfile)
+router.put("/updateProfile",authMiddleware,authController.updateProfile)
 module.exports = router;
